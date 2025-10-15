@@ -18,7 +18,7 @@ const App = () => {
       <Input />
       <Button onClick={weather.fetchData} value="Search" />
       <Card />
-      <Button value="Refresh" />
+      <Button onClick={weather.resetData} value="Refresh" />
     </div>
   );
 };

@@ -21,13 +21,32 @@ export const WeatherProvider = (props) => {
       getWeatherDataForLocation(
         position.coords.latitude,
         position.coords.longitude
-      ).then((data) => setData(data));
+      ).then((newData) => {
+        // Force UI re-render even if data is same
+        setData(null);
+        setTimeout(() => {
+          setData(newData);
+        }, 0);
+      });
     });
+  };
+
+  const resetData = () => {
+    setsearchCity("");
+    setData(null);
+    fetchcurrentData();
   };
 
   return (
     <WeatherContext.Provider
-      value={{ searchCity, data, setsearchCity, fetchData, fetchcurrentData }}
+      value={{
+        searchCity,
+        data,
+        setsearchCity,
+        fetchData,
+        fetchcurrentData,
+        resetData,
+      }}
     >
       {props.children}
     </WeatherContext.Provider>
